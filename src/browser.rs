@@ -88,7 +88,7 @@ impl Browser {
         if let Some(heading) = api_response.heading {
             let style = AnsiStyle {
                 bold: true,
-                color: None,
+                color: Some(AnsiColor::Gold),
             };
             println!(
                 "{}{}{}",
@@ -117,7 +117,7 @@ impl Browser {
     pub fn print_related_topic(&self, index: usize, topic: &Topic) {
         let style = AnsiStyle {
             bold: false,
-            color: Some(AnsiColor::Cyan),
+            color: Some(AnsiColor::BrightGreen),
         };
 
         // Access fields directly instead of using `get`
@@ -140,7 +140,7 @@ impl Browser {
         if let Some(icon) = &topic.icon {
             let style = AnsiStyle {
                 bold: false,
-                color: Some(AnsiColor::Blue),
+                color: Some(AnsiColor::BrightBlue),
             };
             if !icon.url.is_empty() {
                 let full_url = format!("https://duckduckgo.com{}", icon.url);
@@ -172,7 +172,7 @@ impl Browser {
         if let Some(abstract_text) = api_response.abstract_text {
             let style = AnsiStyle {
                 bold: false,
-                color: Some(AnsiColor::Cyan),
+                color: Some(AnsiColor::LightGray),
             };
             println!("Abstract: {}{}", abstract_text, style.escape_code());
         }
@@ -180,7 +180,7 @@ impl Browser {
         if let Some(abstract_source) = api_response.abstract_source {
             let style = AnsiStyle {
                 bold: false,
-                color: Some(AnsiColor::Yellow),
+                color: Some(AnsiColor::Purple),
             };
             println!(
                 "Abstract Source: {}{}",
@@ -192,7 +192,7 @@ impl Browser {
         if let Some(abstract_url) = api_response.abstract_url {
             let style = AnsiStyle {
                 bold: false,
-                color: Some(AnsiColor::Blue),
+                color: Some(AnsiColor::Silver),
             };
             println!("Abstract URL: {}{}", abstract_url, style.escape_code());
         }
@@ -200,10 +200,12 @@ impl Browser {
         if let Some(image) = api_response.image {
             let style = AnsiStyle {
                 bold: false,
-                color: Some(AnsiColor::Blue),
+                color: Some(AnsiColor::SkyBlue),
             };
-            let full_url = format!("https://duckduckgo.com{}", image);
-            println!("Image URL: {}{}", full_url, style.escape_code());
+            if !image.is_empty() {
+                let full_url = format!("https://duckduckgo.com{}", image);
+                println!("Image URL: {}{}", full_url, style.escape_code());
+            }
         }
 
         let topics = &api_response.related_topics;
@@ -322,7 +324,7 @@ impl Browser {
         limit: Option<usize>,
     ) -> Result<(), reqwest::Error> {
         let safe_param = if safe_search { "&kp=1" } else { "&kp=-2" }; // Enable or disable safe search
-        let path = format!("?q={}{}{}", query, operators, safe_param);
+        let path = format!("?q={}&{}{}", query, operators, safe_param);
         self.browse(&path, result_format, limit).await
     }
 }

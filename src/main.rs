@@ -1,6 +1,8 @@
 use clap::Parser;
 use duckduckgo::browser::{Browser, ResultFormat};
 use duckduckgo::cli::Cli;
+use duckduckgo::colors::{AnsiColor, AnsiStyle};
+use duckduckgo::user_agents::USER_AGENTS;
 use urlencoding::encode;
 
 /// The main entry point of the DuckDuckGo search CLI application.
@@ -28,26 +30,46 @@ use urlencoding::encode;
 /// duckduckgo --query "Rust programming" --operators "site:github.com" --limit 5
 /// ```
 ///
-/// # Panics
-/// The function panics if the DuckDuckGo search with operators fails or if the query is missing.
+/// # Errors
+/// The function handles errors gracefully and prints out error messages if the DuckDuckGo search
+/// with operators fails, if the query is missing, etc.
 ///
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Parse command-line arguments
     let args = Cli::parse();
 
+    let style = AnsiStyle {
+        bold: true,
+        color: Some(AnsiColor::Red),
+    };
+
     // Configure reqwest::Client based on command-line options
     let mut client_builder = reqwest::Client::builder();
+
+    // Check if the user selected a valid user agent
     if !args.user_agent.is_empty() {
-        client_builder = client_builder.user_agent(args.user_agent);
+        if let Some(user_agent) = USER_AGENTS.get(&args.user_agent[..]) {
+            client_builder = client_builder.user_agent(*user_agent);
+        } else {
+            // Print an error message and exit if the user agent is not found
+            eprintln!(
+                "{}Error: Invalid user agent selected!{}",
+                style.escape_code(),
+                AnsiStyle::reset_code()
+            );
+            std::process::exit(1);
+        }
     }
     if args.cookie {
         client_builder = client_builder.cookie_store(true);
     }
     if !args.proxy.is_empty() {
-        client_builder = client_builder.proxy(reqwest::Proxy::all(args.proxy).unwrap());
+        // Attempt to create a proxy, and handle errors
+        let proxy = reqwest::Proxy::all(&args.proxy)?;
+        client_builder = client_builder.proxy(proxy);
     }
-    let client = client_builder.build().unwrap();
+    let client = client_builder.build()?;
 
     // Initialize DuckDuckGo browser with the configured client
     let browser = Browser::new(client);
@@ -68,21 +90,26 @@ async fn main() {
             browser
                 .search_operators(
                     &encode(&args.query),
-                    &args.operators,
+                    &encode(&args.operators),
                     args.safe,
                     result_format,
                     Some(limit),
                 )
-                .await
-                .expect("Search with operators failed");
+                .await?;
         } else {
             browser
                 .search(&encode(&args.query), args.safe, result_format, Some(limit))
-                .await
-                .expect("Search failed");
+                .await?;
         }
     } else {
-        // Print an error message if the query is missing
-        println!("Error: Query is required");
+        // Print an error message and exit if the query is missing
+        eprintln!(
+            "{}Error: Query is required!{}",
+            style.escape_code(),
+            AnsiStyle::reset_code()
+        );
+        std::process::exit(1);
     }
+
+    Ok(())
 }

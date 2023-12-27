@@ -85,8 +85,44 @@ duckduckgo --query "rust lang" --limit 3
 ### Set user agent:
 
 ```bash
-duckduckgo --query "rust lang" --user-agent "MyCustomAgent"
+duckduckgo --query "rust lang" --user-agent "chrome"
 ```
+
+| Browser/Agent        |
+|----------------------|
+| firefox              |
+| chrome               |
+| edge                 |
+| safari               |
+| opera                |
+| ie11                 |
+| android              |
+| ios                  |
+| edge_android         |
+| opera_mini           |
+| uc_browser           |
+| blackberry           |
+| mozilla              |
+| bingbot              |
+| yahoo_slurp          |
+| duckduckgo           |
+| baiduspider          |
+| yandexbot            |
+| ahrefsbot            |
+| mj12bot              |
+| semrushbot           |
+| sogou_spider         |
+| exabot               |
+| dotbot               |
+| facebook             |
+| pinterest            |
+| slackbot             |
+| discord              |
+| zoom                 |
+| whatsapp             |
+| applebot             |
+| flipboard            |
+| outlook              |
 
 ### Set cookie for subsequent requests:
 
@@ -106,7 +142,7 @@ duckduckgo --query "rust lang" --proxy "socks5://192.168.1.1:9000"
 |--------------------------|---------------|----------------------------------------------------------|
 | `--safe`                 | `false`       | Enable safe search.                                      |
 | `--proxy`                | `""`          | Set a proxy for the search (e.g., "socks5://192.168.1.1:9000"). |
-| `--user-agent`           | `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3` | Set a custom user agent for the search.                   |
+| `--user-agent`           | `firefox` | Set a custom user agent for the search.                   |
 | `--cookie`               | `true`        | Set a cookie for the search.                              |
 | `--format`               | `false`       | Set the output format (`false` for list or `true` for detailed). |
 | `--limit`                | `10`          | Limit the number of results (default is 10).             |

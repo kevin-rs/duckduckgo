@@ -6,6 +6,58 @@ pub enum AnsiColor {
     Blue,
     /// Yellow color.
     Yellow,
+    /// Red color.
+    Red,
+    /// Green color.
+    Green,
+    /// Magenta color.
+    Magenta,
+    /// Black color.
+    Black,
+    /// White color.
+    White,
+    /// Bright Red color.
+    BrightRed,
+    /// Bright Green color.
+    BrightGreen,
+    /// Bright Yellow color.
+    BrightYellow,
+    /// Bright Blue color.
+    BrightBlue,
+    /// Bright Magenta color.
+    BrightMagenta,
+    /// Bright Cyan color.
+    BrightCyan,
+    /// Dark Gray color.
+    DarkGray,
+    /// Light Gray color.
+    LightGray,
+    /// Olive color.
+    Olive,
+    /// Maroon color.
+    Maroon,
+    /// Navy color.
+    Navy,
+    /// Teal color.
+    Teal,
+    /// Aqua color.
+    Aqua,
+    /// Purple color.
+    Purple,
+    /// Silver color.
+    Silver,
+    /// Dark Red color.
+    DarkRed,
+    /// Lime color.
+    Lime,
+    /// Brown color.
+    Brown,
+    /// Salmon color.
+    Salmon,
+    /// Sky Blue color.
+    SkyBlue,
+    /// Gold color.
+    Gold,
 }
 
 impl AnsiColor {
@@ -26,6 +78,32 @@ impl AnsiColor {
             AnsiColor::Cyan => "\u{001B}[36m",
             AnsiColor::Blue => "\u{001B}[34m",
             AnsiColor::Yellow => "\u{001B}[33m",
+            AnsiColor::Red => "\u{001B}[31m",
+            AnsiColor::Green => "\u{001B}[32m",
+            AnsiColor::Magenta => "\u{001B}[35m",
+            AnsiColor::Black => "\u{001B}[30m",
+            AnsiColor::White => "\u{001B}[37m",
+            AnsiColor::BrightRed => "\u{001B}[91m",
+            AnsiColor::BrightGreen => "\u{001B}[92m",
+            AnsiColor::BrightYellow => "\u{001B}[93m",
+            AnsiColor::BrightBlue => "\u{001B}[94m",
+            AnsiColor::BrightMagenta => "\u{001B}[95m",
+            AnsiColor::BrightCyan => "\u{001B}[96m",
+            AnsiColor::DarkGray => "\u{001B}[90m",
+            AnsiColor::LightGray => "\u{001B}[37;1m",
+            AnsiColor::Olive => "\u{001B}[33;1m",
+            AnsiColor::Maroon => "\u{001B}[31;1m",
+            AnsiColor::Navy => "\u{001B}[34;1m",
+            AnsiColor::Teal => "\u{001B}[36;1m",
+            AnsiColor::Aqua => "\u{001B}[96;1m",
+            AnsiColor::Purple => "\u{001B}[35;1m",
+            AnsiColor::Silver => "\u{001B}[37;2m",
+            AnsiColor::DarkRed => "\u{001B}[31;2m",
+            AnsiColor::Lime => "\u{001B}[32;2m",
+            AnsiColor::Brown => "\u{001B}[33;2m",
+            AnsiColor::Salmon => "\u{001B}[91;1m",
+            AnsiColor::SkyBlue => "\u{001B}[94;1m",
+            AnsiColor::Gold => "\u{001B}[33;3m",
         }
     }
 }
