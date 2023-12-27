@@ -113,7 +113,7 @@ pub struct Cli {
     pub limit: usize,
 
     /// Sets the user agent for the HTTP client.
-    #[arg(short = 'u', long = "user-agent", default_value_t = String::from("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"))]
+    #[arg(short = 'u', long = "user-agent", default_value_t = String::from("firefox"))]
     pub user_agent: String,
 
     /// Sets the cookie for subsequent HTTP requests.
