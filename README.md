@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ```sh
-duckduckgo 0.1.0
+duckduckgo 0.1.2
 
 ▓█████▄  █    ██  ▄████▄   ██ ▄█▀▓█████▄  █    ██  ▄████▄   ██ ▄█▀  ▄████  ▒█████  
 ▒██▀ ██▌ ██  ▓██▒▒██▀ ▀█   ██▄█▒ ▒██▀ ██▌ ██  ▓██▒▒██▀ ▀█   ██▄█▒  ██▒ ▀█▒▒██▒  ██▒
@@ -28,7 +28,7 @@ duckduckgo 0.1.0
 ## 📖 Table of Contents
 
 - [Installation](#-installation)
-- [Feature](#-feature)
+- [Features](#-features)
 - [Usage](#-usage)
 - [Options](#-options)
 - [Contributing](#-contributing)
@@ -42,7 +42,7 @@ To install `duckduckgo`, use the following Cargo command:
 cargo install --locked duckduckgo
 ```
 
-## 🚀 Features
+## ✨ Features
 
 - Perform DuckDuckGo searches with or without operators.
 - Customizable user agent, proxy, and cookie support.
@@ -88,41 +88,93 @@ duckduckgo --query "rust lang" --limit 3
 duckduckgo --query "rust lang" --user-agent "chrome"
 ```
 
-| Browser/Agent        |
-|----------------------|
-| firefox              |
-| chrome               |
-| edge                 |
-| safari               |
-| opera                |
-| ie11                 |
-| android              |
-| ios                  |
-| edge_android         |
-| opera_mini           |
-| uc_browser           |
-| blackberry           |
-| mozilla              |
-| bingbot              |
-| yahoo_slurp          |
-| duckduckgo           |
-| baiduspider          |
-| yandexbot            |
-| ahrefsbot            |
-| mj12bot              |
-| semrushbot           |
-| sogou_spider         |
-| exabot               |
-| dotbot               |
-| facebook             |
-| pinterest            |
-| slackbot             |
-| discord              |
-| zoom                 |
-| whatsapp             |
-| applebot             |
-| flipboard            |
-| outlook              |
+<details>
+<summary><code>Available Browsers/Agents</code></summary>
+
+| Browser/Agent             |
+|---------------------------|
+| firefox                   |
+| chrome                    |
+| edge                      |
+| safari                    |
+| opera                     |
+| ie11                      |
+| android                   |
+| ios                       |
+| edge_android              |
+| opera_mini                |
+| uc_browser                |
+| blackberry                |
+| mozilla                   |
+| bingbot                   |
+| yahoo_slurp               |
+| duckduckgo                |
+| baiduspider               |
+| yandexbot                 |
+| ahrefsbot                 |
+| mj12bot                   |
+| semrushbot                |
+| sogou_spider              |
+| exabot                    |
+| dotbot                    |
+| facebook                  |
+| pinterest                 |
+| slackbot                  |
+| discord                   |
+| zoom                      |
+| whatsapp                  |
+| applebot                  |
+| flipboard                 |
+| outlook                   |
+| linux_firefox             |
+| linux_firefox_alternative |
+| windows_firefox           |
+| older_windows_firefox     |
+| linux_chrome              |
+| macos_safari              |
+| android_chrome            |
+| ios_chrome                |
+| linux_opera               |
+| macos_edge                |
+| windows_edge              |
+| android_samsung_browser   |
+| ios_samsung_browser       |
+| linux_brave               |
+| windows_brave             |
+| android_brave             |
+| ios_brave                 |
+| linux_firefox_new         |
+| linux_chrome_new          |
+| macos_safari_new          |
+| windows_ie_new            |
+| android_chrome_new         |
+| ios_chrome_new             |
+| linux_opera_new            |
+| macos_edge_new              |
+| android_samsung_browser_new |
+| ios_samsung_browser_new     |
+| linux_brave_new              |
+| windows_brave_new            |
+| android_brave_new            |
+| ios_brave_new                |
+| linux_firefox_alternative_new |
+| windows_firefox_new           |
+| linux_chrome_alternative_new  |
+| macos_safari_alternative_new  |
+| windows_ie_alternative_new    |
+| android_chrome_alternative_new |
+| ios_chrome_alternative_new     |
+| linux_opera_alternative_new    |
+| macos_edge_alternative_new      |
+| windows_edge_alternative_new    |
+| android_samsung_browser_alternative_new |
+| ios_samsung_browser_alternative_new     |
+| linux_brave_alternative_new              |
+| windows_brave_alternative_new            |
+| android_brave_alternative_new            |
+| ios_brave_alternative_new                |
+
+</details>
 
 ### Set cookie for subsequent requests:
 
