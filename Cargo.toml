@@ -2,28 +2,55 @@
 name = "duckduckgo"
 version = "0.1.2"
 authors = ["Mahmoud Harmouch <oss@wiseai.dev>"]
-edition = "2021"
+edition = "2024"
 description = "🦆 A CLI and library for colorful DuckDuckGo searches."
 license = "MIT"
-homepage = "https://github.com/wiseaidev/duckduckgo"
+homepage = "https://github.com/kevin-rs/duckduckgo"
 documentation = "https://docs.rs/duckduckgo"
-repository = "https://github.com/wiseaidev/duckduckgo"
-categories = ["command-line-interface", "command-line-utilities"]
+repository = "https://github.com/kevin-rs/duckduckgo"
 keywords = ["cli", "duckduckgo", "search", "dorks", "api"]
+categories = [
+    "command-line-utilities",
+    "network-programming",
+    "web-programming::http-client",
+    "text-processing",
+    "accessibility"
+]
+
+[[bin]]
+name = "ddg"
+path = "src/bin/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.4.11", features = ["derive"] }
-once_cell = "1.19.0"
-reqwest = { version="0.11.23", features=["cookies",] }
-serde = { version = "1.0.193", features = ["derive"] }
-serde_json = "1.0.108"
-tokio = { version = "1.35.1", features = ["full"] }
+clap = { version = "4.5.40", features = ["derive"], optional = true }
+tokio = { version = "1.45.1", features = ["full"], optional = true }
+reqwest = { version="0.11.27", features=["cookies", "json"] }
+serde = { version = "1.0.219", features = ["derive"] }
+phf = { version = "0.12.1", features = ["macros"] }
+serde_json = "1.0.140"
 urlencoding = "2.1.3"
+anyhow = "1.0.98"
+regex = "1.11.1"
+scraper = "0.23.1"
+chrono = "0.4.41"
+
+[dev-dependencies]
+tokio = { version = "1.45.1", features = ["full"] }
+
+[features]
+default = []
+cli = ["clap", "tokio"]
 
 [profile.release]
-codegen-units = 1
 opt-level = "z"
+debug = false
 lto = "thin"
+codegen-units = 3
+panic = "abort"
 strip = "symbols"
+incremental = false
+
+[badges]
+maintenance = { status = "actively-developed" }

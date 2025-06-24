@@ -1,5 +1,14 @@
-use clap::builder::styling::{AnsiColor, Effects, Styles};
 use clap::Parser;
+use clap::ValueEnum;
+use clap::builder::styling::{AnsiColor, Effects, Styles};
+
+#[derive(Debug, Clone, PartialEq, Eq, ValueEnum)]
+pub enum Backend {
+    Auto,
+    Lite,
+    Images,
+    News,
+}
 
 fn styles() -> Styles {
     Styles::styled()
@@ -17,8 +26,7 @@ fn styles() -> Styles {
     name = "duckduckgo",
     propagate_version = true,
     styles = styles(),
-    help_template = r#"{before-help}{name} {version}
-{about-with-newline}
+    help_template = r#"{before-help}{about}
 
 {usage-heading} {usage}
 
@@ -28,64 +36,66 @@ AUTHORS:
     {author}
 "#,
     about=r#"
-▓█████▄  █    ██  ▄████▄   ██ ▄█▀▓█████▄  █    ██  ▄████▄   ██ ▄█▀  ▄████  ▒█████  
-▒██▀ ██▌ ██  ▓██▒▒██▀ ▀█   ██▄█▒ ▒██▀ ██▌ ██  ▓██▒▒██▀ ▀█   ██▄█▒  ██▒ ▀█▒▒██▒  ██▒
-░██   █▌▓██  ▒██░▒▓█    ▄ ▓███▄░ ░██   █▌▓██  ▒██░▒▓█    ▄ ▓███▄░ ▒██░▄▄▄░▒██░  ██▒
-░▓█▄   ▌▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄ ░▓█▄   ▌▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄ ░▓█  ██▓▒██   ██░
-░▒████▓ ▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄░▒████▓ ▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄░▒▓███▀▒░ ████▓▒░
- ▒▒▓  ▒ ░▒▓▒ ▒ ▒ ░ ░▒ ▒  ░▒ ▒▒ ▓▒ ▒▒▓  ▒ ░▒▓▒ ▒ ▒ ░ ░▒ ▒  ░▒ ▒▒ ▓▒ ░▒   ▒ ░ ▒░▒░▒░ 
- ░ ▒  ▒ ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░ ░ ▒  ▒ ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░  ░   ░   ░ ▒ ▒░ 
- ░ ░  ░  ░░░ ░ ░ ░        ░ ░░ ░  ░ ░  ░  ░░░ ░ ░ ░        ░ ░░ ░ ░ ░   ░ ░ ░ ░ ▒  
-   ░       ░     ░ ░      ░  ░      ░       ░     ░ ░      ░  ░         ░     ░ ░  
- ░               ░                ░               ░
-  Search and advanced search in DuckDuckGo 
-  ========================================
+██████╗ ██████╗  ██████╗ 
+██╔══██╗██╔══██╗██╔════╝ 
+██║  ██║██║  ██║██║  ███╗
+██║  ██║██║  ██║██║   ██║
+██████╔╝██████╔╝╚██████╔╝
+╚═════╝ ╚═════╝  ╚═════╝ 
+                         
+Search and advanced search in DuckDuckGo
+========================================
 
-  Perform searches and advanced searches on DuckDuckGo from the command line.
+Perform searches and advanced searches on DuckDuckGo from the command line.
 
-  FEATURES:
-    - Search query: Set the search query with the --query or -q option.
-    - Search operators: Use the --operators or -o option to set search operators.
-    - Safe search: Enable safe search with the --safe option.
-    - Output format: Set the output format (list or detailed) with the --format option.
-    - Result limit: Limit the number of results with the --limit option.
-    - User agent: Set the user agent for the HTTP client with the --user-agent option.
-    - Cookie: Set the cookie for the HTTP client with the --cookie option.
-    - Proxy: Set the proxy for the HTTP client with the --proxy option.
-    - Verbose mode: Show debug messages with the --verbose or -v option.
+FEATURES:
+  - Search query: Set the search query with the --query or -q option.
+  - Search operators: Use the --operators or -o option to set search operators.
+  - Safe search: Enable safe search with the --safe option.
+  - Output format: Set the output format (list or detailed) with the --format option.
+  - Result limit: Limit the number of results with the --limit option.
+  - User agent: Set the user agent for the HTTP client with the --user-agent option.
+  - Cookie: Set the cookie for the HTTP client with the --cookie option.
+  - Proxy: Set the proxy for the HTTP client with the --proxy option.
+  - Backend: Choose the backend used for search (e.g. auto, lite, images, news)
+    with the --backend option.
+  - Verbose mode: Show debug messages with the --verbose or -v option.
 
-  USAGE:
-    duckduckgo [OPTIONS]
+USAGE:
+  ddg [OPTIONS]
 
-  EXAMPLES:
-    - Perform a basic search:
-      duckduckgo --query "rust lang"
+EXAMPLES:
+  - Perform a basic search:
+    ddg --query "rust lang"
 
-    - Use search operators:
-      duckduckgo --query "rust lang" --operators "+tutorial +beginner"
+  - Use search operators:
+    ddg --query "rust lang" --operators "+tutorial +beginner"
 
-    - Enable safe search:
-      duckduckgo --query "rust lang" --safe
+  - Enable safe search:
+    ddg --query "rust lang" --safe
 
-    - Set the output format to detailed:
-      duckduckgo --query "rust lang" --format
+  - Set the output format to detailed:
+    ddg --query "rust lang" --format
 
-    - Limit the number of results to 10:
-      duckduckgo --query "rust lang" --limit 10
+  - Limit the number of results to 10:
+    ddg --query "rust lang" --limit 10
 
-    - Set user agent:
-      duckduckgo --query "rust lang" --user-agent "MyCustomAgent"
+  - Set user agent:
+    ddg --query "rust lang" --user-agent "chrome"
 
-    - Set cookie for subsequent requests:
-      duckduckgo --query "rust lang" --cookie
+  - Set cookie for subsequent requests:
+    ddg --query "rust lang" --cookie
 
-    - Set proxy:
-      duckduckgo --query "rust lang" --proxy "socks5://192.168.1.1:9000"
+  - Set proxy:
+    ddg --query "rust lang" --proxy "socks5://192.168.1.1:9000"
 
-    - Enable verbose mode:
-      duckduckgo --query "rust lang" --verbose
+  - Use a specific backend:
+    ddg --query "rust lang" --backend news
 
-  For more information, visit: https://github.com/wiseaidev/duckduckgo
+  - Enable verbose mode:
+    ddg --query "rust lang" --verbose
+
+For more information, visit: https://github.com/kevin-rs/duckduckgo
 "#
 )]
 pub struct Cli {
@@ -123,4 +133,8 @@ pub struct Cli {
     /// Sets the proxy for the HTTP client (e.g. "socks5://192.168.1.1:9000").
     #[arg(short = 'p', long = "proxy", default_value_t = String::from(""))]
     pub proxy: String,
+
+    /// Sets the backend to use.
+    #[arg(short = 'b', long = "backend", value_enum, default_value_t = Backend::Auto)]
+    pub backend: Backend,
 }
