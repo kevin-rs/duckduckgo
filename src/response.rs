@@ -93,3 +93,56 @@ pub struct Response {
     #[serde(rename = "CreatedDate")]
     pub created_date: Option<String>,
 }
+
+/// Enum representing different result formats for DuckDuckGo searches.
+pub enum ResultFormat {
+    /// Display search results in a list format.
+    List,
+    /// Display search results in a detailed format.
+    Detailed,
+}
+
+/// Represents a single image search result from DuckDuckGo.
+pub struct ImageResult {
+    /// The title or description of the image.
+    pub title: String,
+    /// The direct URL to the full-sized image.
+    pub image: String,
+    /// The URL to the image thumbnail (smaller preview).
+    pub thumbnail: String,
+    /// The URL of the page hosting the image.
+    pub url: String,
+    /// The height of the image in pixels.
+    pub height: u32,
+    /// The width of the image in pixels.
+    pub width: u32,
+    /// The source or provider of the image.
+    pub source: String,
+}
+
+/// Represents a single news article result from DuckDuckGo.
+pub struct NewsResult {
+    /// The publication date of the news article in ISO-8601 format.
+    pub date: String,
+    /// The headline or title of the news article.
+    pub title: String,
+    /// A short excerpt or summary of the news article.
+    pub body: String,
+    /// The URL linking to the full news article.
+    pub url: String,
+    /// Optional URL of an image associated with the news article.
+    pub image: Option<String>,
+    /// The source or publisher of the news article.
+    pub source: String,
+}
+
+/// Represents a single search result from DuckDuckGo Lite search.
+#[derive(Debug, Clone)]
+pub struct LiteSearchResult {
+    /// The title or headline of the search result.
+    pub title: String,
+    /// The URL linked by the search result.
+    pub url: String,
+    /// A short snippet or preview text from the search result.
+    pub snippet: String,
+}
